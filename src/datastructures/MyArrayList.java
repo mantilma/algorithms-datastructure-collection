@@ -6,8 +6,8 @@ package datastructures;
 public class MyArrayList {
 	private static final int SIZE_FACTOR = 5;
 	private Object data[];
-	private int size;
-	private int index;
+	private int size; //current size
+	private int index; //last current index
 	
 	public MyArrayList () {
 		this.data = new Object[SIZE_FACTOR];
