@@ -12,6 +12,7 @@ public class MyHashTable<K,V> {
 		numBuckets = 10;
 		size = 0;
 		
+		//i have to initialize the ArrayList
 		for (int i = 0; i < numBuckets; i++) {
 			bucket.add(null);
 		}		
