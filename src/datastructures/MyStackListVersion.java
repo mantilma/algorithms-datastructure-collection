@@ -5,7 +5,7 @@ package datastructures;
 //The main Stack's characteristic is that insert and delete happens on the same side
 public class MyStackListVersion<T> {
 	
-	private class Node<T> {
+	private class Node {
 		Node next;
 		T data;
 	}
