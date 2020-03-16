@@ -2,6 +2,9 @@ package algorithms.recursion;
 
 import java.util.Arrays;
 
+/*
+ * Write a function that reverses a string recursively.
+ */
 public class ReverseString {
 	
 	public void reverseString(String s) {
