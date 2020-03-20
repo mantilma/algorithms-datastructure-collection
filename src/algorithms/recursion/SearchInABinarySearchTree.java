@@ -23,6 +23,7 @@ You should return this subtree:
 In the example above, if we want to search the value 5, since there is no node with value 5, we should return NULL.
  */
 public class SearchInABinarySearchTree {
+	//questa è una static nested class
 	private static class BinarySearchTree {
 		int val;
 		BinarySearchTree left;
