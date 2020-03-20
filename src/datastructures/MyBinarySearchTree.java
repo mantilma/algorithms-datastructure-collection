@@ -65,6 +65,19 @@ public class MyBinarySearchTree {
 		return false;
 	}
 	
+	public boolean lookupRecursive(Integer value) {
+		return lookupRecursive2(value, this.root);
+	}
+	
+	private boolean lookupRecursive2(Integer value, Node root) {
+		if (root == null) return false;
+		
+		if (root.value == value) return true;
+		
+		if (value < root.value) return lookupRecursive2(value, root.left);
+		else return lookupRecursive2(value, root.right);
+	}
+	
 	public boolean remove (Integer value) {
 		if (root == null) return false;
 		
@@ -162,6 +175,13 @@ public class MyBinarySearchTree {
 		tree.insert(99);
 		tree.insert(91);
 		tree.displayInOrder(tree.root);
+		
+		System.out.println(tree.lookup(32));
+		System.out.println(tree.lookup(0));
+		
+		System.out.println(tree.lookupRecursive(32));
+		System.out.println(tree.lookupRecursive(0));
+		
 	}
 	
 }
