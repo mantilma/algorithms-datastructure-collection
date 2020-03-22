@@ -32,6 +32,15 @@ public class BFSInBinaryTree {
 		}
 	}
 	
+	public void BFSRecursive (Queue<BinaryTree> queue) {
+		if (queue.isEmpty()) return;
+		BinaryTree node = queue.remove();
+		System.out.println(node.val);
+		if (node.left != null) queue.add(node.left);
+		if (node.right != null) queue.add(node.right);
+		BFSRecursive(queue);
+	}
+	
 	public static void main (String[] args) {
 		BinaryTree root = new BinaryTree(5);
 		root.left = new BinaryTree(10);
@@ -41,8 +50,12 @@ public class BFSInBinaryTree {
 		root.right.left = new BinaryTree(30);
 		root.right.right = new BinaryTree(35);
 		
-		System.out.println("Breadth First Search : ");
+		System.out.println("Breadth First Search iterative: ");
 		BFSInBinaryTree i = new BFSInBinaryTree();
 		i.BFSIterative(root);
+		System.out.println("Breadth First Search recursive: ");
+		Queue<BinaryTree> q = new ArrayDeque<BFSInBinaryTree.BinaryTree>();
+		q.add(root);
+		i.BFSRecursive(q);
 	}
 }
