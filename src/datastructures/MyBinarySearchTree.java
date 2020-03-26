@@ -132,7 +132,7 @@ public class MyBinarySearchTree {
 		
 	}
 	
-	//In-order means print (visit) the left branch, then the current node, and finally, the right branch
+	//DFS In-order means print (visit) the left branch, then the current node, and finally, the right branch
 	public void displayInOrder (Node root) {
 		if (root == null) { return; }
 		

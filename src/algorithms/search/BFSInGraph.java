@@ -15,6 +15,9 @@ import java.util.LinkedList;
  * 4: 1
  * 
  * output con source node 2: 2, 0, 1, 3, 4
+ * 
+ * tips: è sostanzialmente uguale alla BFS fatta in un tree soltanto nei grafo potrei visitare due volte lo stesso
+ * nodo se non tengo traccia di quelli già visitati.
  */
 public class BFSInGraph {
 	private static void BFS (LinkedList<Integer>[] adj, int sourceNode) { //in ingresso ho un grafo rappresentato da un array di list (adjency list)
