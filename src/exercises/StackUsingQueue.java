@@ -2,6 +2,10 @@ package exercises;
 
 import java.util.ArrayDeque;
 
+/*
+ * Java program to implement Stack using  
+ * two queue with costly enQueue()  
+ */
 public class StackUsingQueue {
 	ArrayDeque<Integer> queue = new ArrayDeque<>();
 	
