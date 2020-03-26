@@ -16,7 +16,7 @@ public class MyGraph {
 	private Map<Integer, List<Integer>> map = new HashMap<>();
 	
 	private void addVertex (Integer vertex) {
-		this.map.put(vertex, new LinkedList<Integer>()); //potevo anche rappresentare gli edge come arraylist
+		this.map.put(vertex, new LinkedList<Integer>()); //potevo anche rappresentare gli edge come arraylist anziche una lista
 	}
 	
 	public void addEdge (Integer vertex, Integer edge) {
