@@ -44,7 +44,7 @@ public class ClimbStairs {
 		return memo[passi] = climbStairs(scale, passi + 1) + climbStairs(scale, passi + 2) + climbStairs(scale, passi + 3);
 	}
 	
-	//approccio bottom up, costruisco array dal bassa verso l'alto iterativamente: o(n) o(n)
+	//approccio bottom up, costruisco array dal basso verso l'alto iterativamente: o(n) o(n)
 	public static int climbStairsBottomUp (int scale) {
 		if (scale == 1) {
 			return 1;
@@ -60,11 +60,30 @@ public class ClimbStairs {
 		
 	}
 	
+	//approccio bottom up, costruisco array dal basso verso l'alto iterativamente senza salvataggio di tutto l'array dp: o(n) o(1)
+	public static int climbStairsBottomUp2 (int scale) {
+		if (scale == 1) {
+			return 1;
+		}
+		int[] dp = new int[scale + 1];
+		int first = 1;
+		int second = 2;
+		int third = 4;
+		for(int i = 4; i <= scale; i++) {
+			int fourth = first + second + third;
+			first = second;
+			second = third;
+			third = fourth;
+		}
+		return third;
+		
+	}
 	
 	
 	public static void main (String[] args) {
 		System.out.println(climbStairs(5,0));
 		System.out.println(climbStairsMem(5,0,new int[6]));
 		System.out.println(climbStairsBottomUp(5));
+		System.out.println(climbStairsBottomUp2(5));
 	}
 }
