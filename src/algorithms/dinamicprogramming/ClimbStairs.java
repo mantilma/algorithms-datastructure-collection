@@ -28,7 +28,7 @@ package algorithms.dinamicprogramming;
  * 
  */
 public class ClimbStairs {
-	//ricorsion: complessita temporaleO(3^n), spaziale O(n) 
+	//ricorsion top down: complessita temporaleO(3^n), spaziale O(n) 
 	public static int climbStairs (int scale, int passi) {
 		if (passi > scale) return 0;
 		if (passi == scale) return 1;
@@ -36,7 +36,7 @@ public class ClimbStairs {
 		return climbStairs(scale, passi + 1) + climbStairs(scale, passi + 2) + climbStairs(scale, passi + 3);
 	}
 	
-	//miglioramento della soluzione ricorsiva con memoization: complessita temporaleO(n), spaziale O(n)
+	//miglioramento della soluzione ricorsiva top down con memoization: complessita temporaleO(n), spaziale O(n)
 	public static int climbStairsMem (int scale, int passi, int memo[]) {
 		if (passi > scale) return 0;
 		if (passi == scale) return 1;
