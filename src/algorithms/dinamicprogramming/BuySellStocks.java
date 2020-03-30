@@ -5,7 +5,8 @@ import java.util.Arrays;
 /*
  * Say you have an array for which the ith element is the price of a given stock on day i.
  *
- * If you were only permitted to complete at most one transaction (i.e., buy one and sell one share of the stock), design an algorithm to find the maximum profit.
+ * If you were only permitted to complete at most one transaction (i.e., buy one and sell one share of the stock), design 
+ * an algorithm to find the maximum profit.
  *
  * Note that you cannot sell a stock before you buy one.
  * 
@@ -22,7 +23,22 @@ import java.util.Arrays;
  * Output: 0
  * Explanation: In this case, no transaction is done, i.e. max profit = 0.
  *
+ * APPROCCIO: il fatto che devo cercare un max subito mi fa pensare alla programmazione dinamica.
+ * La soluzione ottimale del problema t(n) è all'interno della soluzione dei suoi sottoproblemi max o min di t(n-1) t(n-2).
+ * si:
+ * We are just using the result of (n-1)th iteration in nth iteration.
  *
+ *	maxval(0) = 0
+ *
+ *	maxval(1) = val1 - val0;
+ *
+ *	maxval(2) = max( (val2 - val1) , (val2 - val0), maxval(1) )
+ *
+ *	maxval(3) = max( (val3 - val2) , (val3 - val1), (val3 - va0) , maxval(2) )
+ *
+ *	maxval(4) = max( (val4 - val3), (val4 - val2) , (val4 - val1), (val4 - va0) , maxval(3) )
+ *
+ *	maxval(n) = max( (valn - valn- 1), (valn - valn-2), (valn - valn-3),..., (valn - val0), maxval(n - 1) )
  */
 public class BuySellStocks {
 	

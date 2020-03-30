@@ -9,6 +9,10 @@ import java.util.HashMap;
  * Output: {6,10} {2,4,10} --> output 2
  * 
  * Assume: array ordered, no duplicate, input 0 output 1 ovvero {}
+ * 
+ * APPROCCIO: questo è un problema dove voglio trovare tutte le possibili soluzioni. Quindi approccio backtracking.
+ * Ricordarsi che se si presentano stessi sottoproblemi utilizzare tecnica di programmazione dinamica recursion + memoization
+ * approccio top-down.
  */
 public class FindsSetOfNumberAddUpTo {
 	public static int dpMemoitazion (int[] input, int total, int i, HashMap<String, Integer> mem) {
