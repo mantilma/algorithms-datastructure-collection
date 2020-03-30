@@ -24,7 +24,10 @@ package algorithms.dinamicprogramming;
 	2. 1 step + 2 steps
 	3. 2 steps + 1 step
 
-
+	//Ragionamento: apparentemente non mi sembra un problema che posso risolvere con la programmazione dinamica
+	 * perchè:
+	 * non voglio UNA sola soluzione ottima (max o min) ma tutte le soluzioni possibili.
+	 * Quindi mi serve la tecnica del backtracking (DFS, state space tree, condizione di 
  * 
  */
 public class ClimbStairs {
