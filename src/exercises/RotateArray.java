@@ -2,6 +2,7 @@ package exercises;
 
 import java.util.Arrays;
 
+//NON FUNZIONA PER ARRAY PARI!!!! DA PERFERZIONARE
 public class RotateArray {
 	public static void rotate(int[] nums, int k) {
 		int i = 0;

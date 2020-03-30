@@ -1,4 +1,4 @@
-package algorithms.dinamicprogramming;
+package algorithms.backtracking;
 
 import java.util.HashMap;
 
