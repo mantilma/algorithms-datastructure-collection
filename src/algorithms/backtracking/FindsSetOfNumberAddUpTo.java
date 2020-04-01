@@ -10,8 +10,10 @@ import java.util.HashMap;
  * 
  * Assume: array ordered, no duplicate, input 0 output 1 ovvero {}
  * 
- * APPROCCIO: questo è un problema dove voglio trovare tutte le possibili soluzioni. Quindi approccio backtracking.
- * Ricordarsi che se si presentano stessi sottoproblemi utilizzare tecnica di programmazione dinamica recursion + memoization
+ * APPROCCIO: questo è un problema dove voglio trovare tutte le possibili soluzioni e le voglio tutte non una in particolare. 
+ * Quindi approccio backtracking.
+ * Ricordarsi che se successivamente noto che si presentano gli stessi sottoproblemi utilizzare tecnica di programmazione 
+ * dinamica recursion + memoization
  * approccio top-down.
  */
 public class FindsSetOfNumberAddUpTo {
