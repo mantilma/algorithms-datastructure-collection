@@ -38,13 +38,13 @@ public class FewestCoinChange {
 	//questo mi darebbe tutte le possibili combinazioni di cambi ovvero:
 	// input {1,2,5}
 	// output = 9 ovvero {5},{2,2,1},{2,1,2},{2,1,1,1},{1,2,2},{1,2,1,1},{1,1,2,1},{1,1,1,2},{1,1,1,1,1}
-	public static int functionTopDownMemoization(int[] coins, int amount) {
+	public static int f(int[] coins, int amount) {
 		if (amount == 0) return 1;
 		if (amount < 0) return 0;
 		
 		int output = 0;
 		for (int coin : coins) {
-		  output += functionTopDownMemoization(coins, amount - coin);
+		  output += f(coins, amount - coin);
 		}
 		
 		return output;
@@ -181,7 +181,7 @@ public class FewestCoinChange {
 	  }
 	
 	public static void main (String[] args) {
-		System.out.println(functionTopDownMemoization(new int[] {1,2,5}, 11));
+		System.out.println(f(new int[] {1,2,5}, 11));
 		System.out.println(fun(new int[] {1,2,5}, 2, 11));
 		System.out.println(coinChange(new int[] {1,2,5}, 2, 303));
 
