@@ -1,6 +1,7 @@
 package algorithms.backtracking;
 
 import java.util.Arrays;
+import java.util.HashMap;
 
 /* You are given coins of different denominations and a total amount of money amount. Write a function to compute the fewest number of coins that you need to make up that amount. If that amount of money cannot be made up by any combination of the coins, return -1.
  *
@@ -15,7 +16,21 @@ import java.util.Arrays;
  * Input: coins = [2], amount = 3
  * Output: -1
  * 
+ * OSSERVAZIONE INIZIALE: Problema di ottimizzazione perche parliamo di fewest number of money.
+ * quindi le tre tecniche che conosciamo per questo tipo di problemi sono:
+ * 1 - greedy
+ * 2 - dp
+ * 3 - branch and bound
  * 
+ * Scartiamo la greedy , perchè sappiamo che trova l'ottimalità di un problema solo in alcuni casi specifici esempio DJKSTRA
+ * Scartiamo branch and bound non ancora studiata.
+ * Vediamo se possiamo usare la DP. Ma prima supponiamo che io non trovo la chiave di logica per applicare la programmazione 
+ * dinamica al problema allora cosa fare in questi casi? Posso pensare di utilizzare la tecnica backtracking  
+ * per trovare tutte le possibili soluzioni, e tra tutte le soluzione faccio in modo di trovare LA SOLUZIONE MINIMA! 
+ * Se poi mi accorgo 
+ * che ci sono sotto soluzioni che si ripetono posso utilizzare la tecnica di memoitazion. 
+ * Quindi deciso che utilizziamo la backtracking disegnamo l'albero di stato (state space tree)... l'albero mi permetterà 
+ * di capire meglio il problema, trovare le condizioni di arresto e quindi programamre il mio codice ricorsivo meglio...
  * 
  */
 public class FewestCoinChange {
@@ -34,12 +49,10 @@ public class FewestCoinChange {
 		
 		return output;
 	}
-
-	/* ma io voglio la soluzione migliore!
-	 * il return del passo base non indica piu +1 sul totale delle soluzioni trovate ma se trovo (1) o non trovo (0) 
-	 * una soluzione e solo se ho trovato la soluzione ed è la soluzione minima tra quelle trovate allora la posso restituire
+	
+	/* backtracking soluzione migliore vecchia versione con permutazioni quindi dei calcoli inutili
 	 */
-	private static int coinChange(int[] coins, int amount) {
+	/*private static int coinChange(int[] coins, int amount) {
 		if (amount < 0) return -1;
 		if (amount == 0) return 0;
 
@@ -51,22 +64,83 @@ public class FewestCoinChange {
 		}
 
 		return (min == Integer.MAX_VALUE) ? -1 : min;
+	}*/
+	
+	//ma io non voglio le permutazioni ovvero ai fini del problema {2,2,1} è uguale a {1,2,2}
+	//space tree con permutazioni e ripetizione
+	public static int fun(int[] coins, int index, int amount) {
+		if (amount == 0) return 1;
+		if (amount < 0) return 0;
+		if (amount > 0 && index < 0) return 0;
+		
+		int output = 0;
+		
+		output = fun(coins, index - 1, amount) + fun(coins, index, amount - coins[index]);
+		
+		return output;
 	}
 
-	//Ma io voglio memorizzare soluzioni già calcolate
-	private static int coinChange(int[] coins, int amount, int[] mem) {
+	/* ma io voglio la soluzione migliore!
+	 * allora trasformo il codice di prima dicendo che il return del passo base non indica piu +1 sul totale delle soluzioni 
+	 * trovate ma se trovo (1) o non trovo (0) 
+	 * una soluzione e solo se ho trovato la soluzione ed è la soluzione minima tra quelle trovate allora la posso restituire
+	 */
+	private static int coinChange(int[] coins, int index, int amount) {
 		if (amount < 0) return -1;
 		if (amount == 0) return 0;
-		if (mem[amount-1] != 0) return mem[amount-1];
-		
+		if (amount > 0 && index < 0) return -1;
+
+		int minLeft = Integer.MAX_VALUE;
+		int minRight = Integer.MAX_VALUE;
 		int min = Integer.MAX_VALUE;
-		for (int coin : coins) {
-			int res = coinChange(coins, amount - coin);
-			if (res >= 0 && res < min)
-				min = 1 + res;
+		
+		int resLeft = coinChange(coins, index, amount - coins[index]);
+		int resRight = coinChange(coins, index - 1, amount);
+		
+		if (resLeft >= 0 && resLeft < minLeft) {
+			minLeft = 1 + resLeft;
 		}
-		mem[amount-1] = (min == Integer.MAX_VALUE) ? -1 : min;
-		return mem[amount-1];
+		
+		if (resRight >= 0 && resRight < minRight) {
+			minRight = resRight; // perchè sul nodo destro non devo aggiungere
+		}
+		
+		min = minLeft < minRight ? minLeft : minRight; 
+
+		return (min == Integer.MAX_VALUE) ? -1 : min;
+	}
+
+	//Ma io voglio memorizzare soluzioni già calcolate cosi risparmio chiamate!
+	private static int coinChange2(int[] coins, int index, int amount, HashMap<String, Integer> mem) {
+		if (amount < 0) return -1;
+		if (amount == 0) return 0;
+		if (amount > 0 && index < 0) return -1;
+		
+		String key = amount + ":" + index;
+		if (mem.containsKey(key)) {
+			return mem.get(key);
+		}
+		
+		int minLeft = Integer.MAX_VALUE;
+		int minRight = Integer.MAX_VALUE;
+		int min = Integer.MAX_VALUE;
+		
+		int resLeft = coinChange(coins, index, amount - coins[index]);
+		int resRight = coinChange(coins, index - 1, amount);
+		
+		if (resLeft >= 0 && resLeft < minLeft) {
+			minLeft = 1 + resLeft;
+		}
+		
+		if (resRight >= 0 && resRight < minRight) {
+			minRight = resRight; // perchè sul nodo destro non devo aggiungere
+		}
+		
+		min = minLeft < minRight ? minLeft : minRight; 
+		
+		int result = (min == Integer.MAX_VALUE) ? -1 : min;
+		mem.put(key, result);
+		return result;
 	}
 	
 	/* Ma la vera programmazione dinamica è quella bottom-up. Si ragiona così:
@@ -107,9 +181,11 @@ public class FewestCoinChange {
 	  }
 	
 	public static void main (String[] args) {
-		System.out.println(functionTopDownMemoization(new int[] {1,2,5}, 5));
-		System.out.println(coinChange(new int[] {1,2,5}, 11));
-		//System.out.println(functionTopDownMemoization2(new int[] {1,2,5}, 11, 11));
+		System.out.println(functionTopDownMemoization(new int[] {1,2,5}, 11));
+		System.out.println(fun(new int[] {1,2,5}, 2, 11));
+		System.out.println(coinChange(new int[] {1,2,5}, 2, 303));
+
+		System.out.println(coinChange2(new int[] {1,2,5}, 2, 303, new HashMap<String, Integer>()));
 		
 	}
 }
