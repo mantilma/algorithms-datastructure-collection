@@ -27,7 +27,11 @@ public class FindsSetOfNumberAddUpTo {
 		if (i<0) return 0;
 		
 		int result = 0;
-		if (total < input[i]) result = dpMemoitazion(input, total, i-1, mem);
+		//questo if mi risparmia alcune chiamate al ramo sx, quelle in cui includo l'elemento, perchè già posso dire 
+		//visto che il totale è minore dell'elemento che voglio inserire mi darebbe la condizione del passo base total < 0
+		//e ritornerebbe 0. Questo if volendo posso anche eliminarlo ed il codice funzionerebbe uguale è solo una ottimizzazione
+		//in più.
+		if (total < input[i]) result = dpMemoitazion(input, total, i-1, mem); 
 		else {
 			result = dpMemoitazion(input, total - input[i], i - 1, mem) + 
 					 dpMemoitazion(input, total, i - 1, mem);

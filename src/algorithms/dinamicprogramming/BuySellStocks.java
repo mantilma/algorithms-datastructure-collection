@@ -1,7 +1,5 @@
 package algorithms.dinamicprogramming;
 
-import java.util.Arrays;
-
 /*
  * Say you have an array for which the ith element is the price of a given stock on day i.
  *
@@ -42,7 +40,7 @@ import java.util.Arrays;
  */
 public class BuySellStocks {
 	
-	//soluzione ricorsiva top down. t(n) = 2T(n/2) + O(n) = O(nlgn)
+	//soluzione ricorsiva top down DIVIDE AND CONQUER. t(n) = 2T(n/2) + O(n) = O(nlgn)
 	//O(n) è dovuto ai calcoli dei max per ogni chiamata.
 	//complessità spaziale O(lgn) 
 	public static int BuySellStockTopDown(int[] prices, int indexLow, int indexHigh) {
@@ -54,15 +52,15 @@ public class BuySellStocks {
 		
 		int minLeft = Integer.MAX_VALUE;
 		for (int i = indexLow; i <= index_medium; i++) {
-			minLeft = prices[i] < minLeft ? prices[i] : minLeft;
+			minLeft = prices[i] < minLeft ? prices[i] : minLeft; //prendo tra i minimi di sx (prezzo di acquisto piu basso)
 		}
 		int maxRight = Integer.MIN_VALUE;
 		for (int i = index_medium + 1; i <= indexHigh; i++) {
-			maxRight = prices[i] > maxRight ? prices[i] : maxRight;
+			maxRight = prices[i] > maxRight ? prices[i] : maxRight; //prendo tra i massim di dx (prezzo di vendita più alto)
 		}
 		int profit = maxRight - minLeft;
 		
-		return Math.max(Math.max(profitLeft, profitRight),profit);		
+		return Math.max(Math.max(profitLeft, profitRight),profit);	//restituisco il profitto massimo tra quello di sx, dx e il corrente
 	}
 	/*
 	public static int[] BuySellStockTopDown2(int[] prices, int indexLow, int indexHigh) {
@@ -99,14 +97,16 @@ public class BuySellStocks {
 		
 		int[] profit = new int[prices.length];
 		int[] min = new int[prices.length];
-		profit[0] = 0;
-		min[0] = prices[0];
+		profit[0] = 0; //array dove memorizzo i profitti massimi per ciascuno giorno. Leggero la soluzione in profit[prices.length -1]
+		min[0] = prices[0]; //array dove memorizzo il prezzo minimo di acquisto
 		
 		for (int i = 1; i < prices.length; i++) {
 			int profitTmp = prices[i] - min[i-1];
 			
+			//mi domando il profitto corrente è maggiore o no del profitto calcolato alla soluzione precedente
 			profit[i] = profitTmp > profit[i-1] ? profitTmp : profit[i-1];
 			
+			//mi domando: il prezzo minimo corrente di acquisto è minore o no del prezzo minimo calcolato alla soluzione precedente
 			min[i] = min[i-1] > prices[i] ? prices[i] : min[i-1];
 			
 		}
