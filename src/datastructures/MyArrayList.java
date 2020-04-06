@@ -47,7 +47,7 @@ public class MyArrayList {
 		if(i < 0) {
 			throw new Exception("Negative Value");
 		}
-		else if (i > this.index - 1) {
+		else if (i > this.index) {
 			throw new Exception("ArrayIndexOutOfBound");
 		}
 		System.out.println("Object getting removed: "+this.data[i]);
