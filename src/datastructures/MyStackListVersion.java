@@ -29,7 +29,7 @@ public class MyStackListVersion<T> {
 	
 	public T peek () throws Exception {
 		if (head == null) throw new Exception("Empty Stack");
-		return (T) head.data;
+		return head.data;
 	}
 	
 	public void display() {
