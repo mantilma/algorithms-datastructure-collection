@@ -13,7 +13,11 @@ Given a binary tree
 
 Return 3, which is the length of the path [4,2,1,3] or [5,2,1,3].
 
-Note: The length of path between two nodes is represented by the number of edges between them. */
+Note: The length of path between two nodes is represented by the number of edges between them. 
+
+* soluzione: complessità spaziale nel caso peggiore albero sbilanciato abbiamo O(n). se albero bilanciato la massima profondità dello stack O(lgn)
+* complessità temporale è data dalla formula ricorsiva  2T(n/2) + 1 = O(n)
+*/
 
 public class DiameterOfBinaryTree {
 	int solution = 0;
