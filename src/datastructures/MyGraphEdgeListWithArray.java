@@ -13,8 +13,6 @@ public class MyGraphEdgeListWithArray {
 		for (int[] array: edgeList) {
 			System.out.println(Arrays.toString(array));
 		}
-	} 
-	
-	
+	} 	
 	
 }
