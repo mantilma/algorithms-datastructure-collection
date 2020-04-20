@@ -5,7 +5,7 @@ import java.util.HashSet;
 import java.util.LinkedList;
 
 /*
- * BFS in a graph.
+ * DFS in a graph.
  * 
  * input con adjencylist: 
  * 0: 2 -> 1
